@@ -51,14 +51,17 @@ public class HttpInvoker {
 
         OkHttpClient client = new OkHttpClient();
 
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
-        httpRequestDO.getRequestParamMap().forEach((k, v) -> formBodyBuilder.add(k, String.valueOf(v)));
+        String jsonBody = GSON.toJson(httpRequestDO.getRequestParamMap());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonBody);
+//
+//        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+//        httpRequestDO.getRequestParamMap().forEach((k, v) -> formBodyBuilder.add(k, String.valueOf(v)));
 
 
         String url = buildUrlPrefix(httpRequestDO);
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
-                .post(formBodyBuilder.build());
+                .post(requestBody);
         httpRequestDO.getHeaderMap().forEach((k, v) -> requestBuilder.addHeader(k, String.valueOf(v)));
 
         try (Response response = client.newCall(requestBuilder.build()).execute()) {
