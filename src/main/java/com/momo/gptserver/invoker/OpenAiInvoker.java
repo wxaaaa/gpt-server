@@ -15,17 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class OpenAiInvoker {
 
-    private static final String DEFAULT_TOKEN = "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";
-
     public OpenAiResponseDO invokeChat(OpenAiRequestDO openAiRequestDO) {
         if (!openAiRequestDO.isValid()) {
             OpenAiResponseDO.fail("invalid invoke params");
         }
-        String token = StringUtils.isEmpty(openAiRequestDO.getToken()) ? DEFAULT_TOKEN : openAiRequestDO.getToken();
 
         try {
 
-            OpenAiService service = new OpenAiService(token, Duration.ofSeconds(30L));
+            OpenAiService service = new OpenAiService(openAiRequestDO.getToken(), Duration.ofSeconds(30L));
             List<ChatMessage> chatMessageList = openAiRequestDO.getMessage().stream()
                     .map(e -> new ChatMessage(openAiRequestDO.getRole(), e))
                     .collect(Collectors.toList());
