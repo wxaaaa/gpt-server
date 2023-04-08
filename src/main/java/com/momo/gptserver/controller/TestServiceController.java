@@ -13,8 +13,13 @@ public class TestServiceController {
     @Resource
     private TestService testService;
 
-    @PostMapping("testHttpInvoke")
-    public HttpResponseDO getSysInfo(@RequestBody HttpRequestDO httpRequestDO){
+    @PostMapping("testHttpGet")
+    public HttpResponseDO testHttpGet(@RequestBody HttpRequestDO httpRequestDO){
         return testService.testHttpGet(httpRequestDO);
+    }
+
+    @PostMapping("testHttpPost")
+    public HttpResponseDO testHttpPost(@RequestBody HttpRequestDO httpRequestDO){
+        return testService.testHttpPost(httpRequestDO);
     }
 }

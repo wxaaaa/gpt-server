@@ -15,4 +15,8 @@ public class TestService {
     public HttpResponseDO testHttpGet(HttpRequestDO httpRequestDO) {
         return httpInvoker.httpGet(httpRequestDO);
     }
+
+    public HttpResponseDO testHttpPost(HttpRequestDO httpRequestDO) {
+        return httpInvoker.httpPost(httpRequestDO);
+    }
 }

@@ -49,20 +49,19 @@ public class HttpInvoker {
             return HttpResponseDO.fail("invalid http request");
         }
 
-        String jsonData = GSON.toJson(httpRequestDO.getRequestParamMap());
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
-                jsonData
-        );
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        httpRequestDO.getRequestParamMap().forEach((k, v) -> formBodyBuilder.add(k, String.valueOf(v)));
+
 
         String url = buildUrlPrefix(httpRequestDO);
-        Request request = new Request.Builder()
+        Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
-                .build();
+                .post(formBodyBuilder.build());
+        httpRequestDO.getHeaderMap().forEach((k, v) -> requestBuilder.addHeader(k, String.valueOf(v)));
 
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = client.newCall(requestBuilder.build()).execute()) {
             if (!response.isSuccessful()) {
                 return HttpResponseDO.fail("reponse failed, " + response.message());
             }

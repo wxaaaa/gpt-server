@@ -16,7 +16,7 @@ public class HttpRequestDO {
     private Map<String, Object> requestParamMap = Maps.newHashMap();
 
     public boolean isValid() {
-        return !StringUtils.isEmpty(host) && !StringUtils.isEmpty(port);
+        return !StringUtils.isEmpty(host) && !StringUtils.isEmpty(protocol);
     }
 
     public static HttpRequestDO asHttp() {

@@ -1,0 +1,7 @@
+com/momo/gptserver/invoker/HttpInvoker.class
+com/momo/gptserver/module/HttpRequestDO.class
+com/momo/gptserver/module/HttpResponseDO.class
+com/momo/gptserver/ApplicationStarter.class
+com/momo/gptserver/controller/TestServiceController.class
+com/momo/gptserver/service/TestService.class
+com/momo/gptserver/config/SwaggerConfig.class
