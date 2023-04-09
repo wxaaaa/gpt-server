@@ -52,6 +52,7 @@ public class WeixinService {
 
         Integer score = jsonObject.getInteger("情感程度");
         analyseDTO.setScore(score);
+        analyseDTO.setOriginResponse(openAiResponseDO.getOriginResult());
         return analyseDTO;
     }
 }

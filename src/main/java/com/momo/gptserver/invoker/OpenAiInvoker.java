@@ -2,6 +2,7 @@ package com.momo.gptserver.invoker;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.momo.gptserver.module.ChatCompletionOptionDO;
 import com.momo.gptserver.module.OpenAiRequestDO;
 import com.momo.gptserver.module.OpenAiResponseDO;
 import com.theokanning.openai.completion.chat.ChatCompletionChoice;
@@ -21,6 +22,11 @@ import java.util.stream.Collectors;
 public class OpenAiInvoker {
 
     public OpenAiResponseDO invokeChat(OpenAiRequestDO openAiRequestDO) {
+        ChatCompletionOptionDO optionDO = new ChatCompletionOptionDO();
+        return invokeChat(openAiRequestDO, optionDO);
+    }
+
+    public OpenAiResponseDO invokeChat(OpenAiRequestDO openAiRequestDO, ChatCompletionOptionDO optionDO) {
         if (!openAiRequestDO.isValid()) {
             OpenAiResponseDO.fail("invalid invoke params");
         }
@@ -35,6 +41,7 @@ public class OpenAiInvoker {
             ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()
                     .messages(chatMessageList)
                     .model(openAiRequestDO.getModel())
+                    .temperature(optionDO.getTemperature())
                     .build();
 
             StringBuilder sb = new StringBuilder();
