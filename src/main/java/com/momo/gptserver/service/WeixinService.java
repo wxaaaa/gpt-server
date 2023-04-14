@@ -49,7 +49,7 @@ public class WeixinService {
         }
 
         // 只拿第一个msg
-        promptBuildService.generateResult(promptName, openAiResponseDO);
+        analyseDTO = promptBuildService.generateResult(promptName, openAiResponseDO);
         return analyseDTO;
     }
 }
