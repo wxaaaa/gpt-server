@@ -49,7 +49,6 @@ public class WeixinService {
         }
 
         // 只拿第一个msg
-        analyseDTO = promptBuildService.generateResult(promptName, openAiResponseDO);
-        return analyseDTO;
+        return promptBuildService.generateResult(promptName, openAiResponseDO);
     }
 }
